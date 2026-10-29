@@ -1,0 +1,121 @@
+[
+  {
+    "id": "cybercrime-helpline-1930",
+    "name": {
+      "en": "National Cybercrime Helpline 1930",
+      "hi": "राष्ट्रीय साइबर अपराध हेल्पलाइन 1930",
+      "mr": "राष्ट्रीय सायबर गुन्हे हेल्पलाईन १९३०"
+    },
+    "category": "national_helpline",
+    "number": "1930",
+    "url": "https://cybercrime.gov.in",
+    "description": {
+      "en": "Official Ministry of Home Affairs citizen helpline for reporting financial fraud and cyber offenses including NCII, harassment, and morphing.",
+      "hi": "गृह मंत्रालय की आधिकारिक नागरिक हेल्पलाइन जो वित्तीय धोखाधड़ी और अंतरंग छवि दुरुपयोग, उत्पीड़न तथा मॉर्फिंग सहित साइबर अपराधों की रिपोर्टिंग के लिए है।",
+      "mr": "गृह मंत्रालयाची अधिकृत नागरिक हेल्पलाईन जी आर्थिक फसवणूक आणि NCII, छळ, मॉर्फिंगसह सायबर गुन्ह्यांची नोंद करण्यासाठी आहे."
+    },
+    "verified": true,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "cybercrime-portal",
+    "name": {
+      "en": "National Cybercrime Reporting Portal (NCRP)",
+      "hi": "राष्ट्रीय साइबर अपराध रिपोर्टिंग पोर्टल (NCRP)",
+      "mr": "राष्ट्रीय सायबर गुन्हे नोंदणी पोर्टल (NCRP)"
+    },
+    "category": "portal",
+    "url": "https://cybercrime.gov.in",
+    "description": {
+      "en": "Official Indian government portal to lodge online complaints about women and child cyber crimes (anonymously or with registration).",
+      "hi": "महिला और बच्चों के साइबर अपराधों (अनाम रूप से या पंजीकरण के साथ) की ऑनलाइन शिकायत दर्ज करने के लिए आधिकारिक भारतीय सरकारी पोर्टल।",
+      "mr": "महिला आणि बालकांवरील सायबर गुन्ह्यांची (अनामिकपणे किंवा नोंदणीसह) ऑनलाइन तक्रार दाखल करण्यासाठी भारत सरकारचे अधिकृत पोर्टल."
+    },
+    "verified": true,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "emergency-112",
+    "name": {
+      "en": "National Emergency Number 112",
+      "hi": "राष्ट्रीय आपातकालीन नंबर 112",
+      "mr": "राष्ट्रीय आपत्कालीन क्रमांक ११२"
+    },
+    "category": "emergency",
+    "number": "112",
+    "url": "https://112.gov.in",
+    "description": {
+      "en": "Single emergency response support system across India for immediate police, medical, or fire assistance.",
+      "hi": "तत्काल पुलिस, चिकित्सा या अग्निशमन सहायता के लिए पूरे भारत में एकीकृत आपातकालीन प्रतिक्रिया सहायता प्रणाली।",
+      "mr": "त्वरित पोलिस, वैद्यकीय किंवा अग्निशामक मदतीसाठी संपूर्ण भारतातील एकात्मिक आपत्कालीन प्रतिसाद प्रणाली."
+    },
+    "verified": true,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "womens-helpline-181",
+    "name": {
+      "en": "Women Helpline 181",
+      "hi": "महिला हेल्पलाइन 181",
+      "mr": "महिला हेल्पलाईन १८१"
+    },
+    "category": "helpline",
+    "number": "181",
+    "description": {
+      "en": "24x7 toll-free helpline providing confidential counseling, crisis intervention, and rescue for women facing violence or harassment.",
+      "hi": "हिंसा या उत्पीड़न का सामना कर रही महिलाओं के लिए 24x7 टोल-फ्री हेल्पलाइन, जो गोपनीय परामर्श, संकट हस्तक्षेप और बचाव प्रदान करती है।",
+      "mr": "हिंसा किंवा छळाला सामोरे जाणाऱ्या महिलांसाठी २४x७ विनामूल्य हेल्पलाईन, जी गोपनीय समुपदेशन, मदत आणि संरक्षण पुरवते."
+    },
+    "verified": true,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "childline-1098",
+    "name": {
+      "en": "Childline 1098 (Children & Minors)",
+      "hi": "चाइल्डलाइन 1098 (बच्चे और नाबालिग)",
+      "mr": "चाइल्डलाईन १०९८ (बालके व अल्पवयीन)"
+    },
+    "category": "minor_support",
+    "number": "1098",
+    "description": {
+      "en": "Emergency 24x7 helpline for children in distress. If the affected person is under 18, immediately contact Childline.",
+      "hi": "संकट में फंसे बच्चों के लिए आपातकालीन 24x7 हेल्पलाइन। यदि प्रभावित व्यक्ति 18 वर्ष से कम आयु का है, तो तुरंत चाइल्डलाइन से संपर्क करें।",
+      "mr": "संकटात असलेल्या मुलांसाठी आपत्कालीन २४x७ हेल्पलाईन. जर बाधित व्यक्ती १८ वर्षांपेक्षा कमी वयाची असेल, तर त्वरित चाइल्डलाईनशी संपर्क साधा."
+    },
+    "verified": true,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "local-police-station",
+    "name": {
+      "en": "Local Police Station / Cyber Cell",
+      "hi": "स्थानीय पुलिस स्टेशन / साइबर सेल",
+      "mr": "स्थानिक पोलिस ठाणे / सायबर सेल"
+    },
+    "category": "law_enforcement",
+    "description": {
+      "en": "File a formal complaint or FIR under the Bharatiya Nyaya Sanhita (BNS) and the Information Technology Act (Sections 66E, 67, 67A).",
+      "hi": "भारतीय न्याय संहिता (बीएनएस) और सूचना प्रौद्योगिकी अधिनियम (धारा 66E, 67, 67A) के तहत औपचारिक शिकायत या प्राथमिकी दर्ज कराएं।",
+      "mr": "भारतीय न्याय संहिता (BNS) आणि माहिती तंत्रज्ञान कायद्याच्या (कलम 66E, 67, 67A) अंतर्गत औपचारिक तक्रार किंवा एफआयआर (FIR) दाखल करा."
+    },
+    "verified": true,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "one-stop-centre",
+    "name": {
+      "en": "One Stop Centres (Sakhi Centres)",
+      "hi": "वन स्टॉप सेंटर (सखी केंद्र)",
+      "mr": "वन स्टॉप सेंटर (सखी केंद्र)"
+    },
+    "category": "victim_support",
+    "description": {
+      "en": "Government centers offering integrated support including medical aid, legal counseling, police assistance, and shelter under one roof.",
+      "hi": "सरकारी केंद्र जो एक ही छत के नीचे चिकित्सा सहायता, कानूनी परामर्श, पुलिस सहायता और आश्रय सहित एकीकृत सहायता प्रदान करते हैं।",
+      "mr": "एकाच छताखाली वैद्यकीय मदत, कायदेशीर समुपदेशन, पोलिस मदत आणि निवारा देणारी सरकारी केंद्रे."
+    },
+    "verified": true,
+    "lastVerified": "2026-03-01"
+  }
+]

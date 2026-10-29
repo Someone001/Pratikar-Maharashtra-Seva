@@ -1,0 +1,216 @@
+[
+  {
+    "id": "instagram",
+    "displayName": "Instagram",
+    "howToFindLink": {
+      "en": "Tap the three dots (...) on the top right of the post/reel/profile and select 'Copy Link'. For direct messages or stories, take a timestamped screenshot or note the username.",
+      "hi": "पोस्ट/रील/प्रोफाइल के ऊपर दाईं ओर तीन बिंदुओं (...) पर टैप करें और 'Copy Link' चुनें। डायरेक्ट मैसेज या स्टोरी के लिए समय सहित स्क्रीनशॉट लें या यूजरनेम नोट करें।",
+      "mr": "पोस्ट/रील/प्रोफाइलच्या वरच्या उजव्या बाजूला असलेल्या तीन ठिपक्यांवर (...) टॅप करा आणि 'Copy Link' निवडा. थेट संदेश किंवा स्टोरीसाठी वेळेसह स्क्रीनशॉट घ्या किंवा युझरनेम नोंदवा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Meta India Grievance Officer details are published in their Help Center under Indian Grievance Redressal Mechanism.",
+      "hi": "मेटा इंडिया शिकायत अधिकारी का विवरण भारतीय शिकायत निवारण तंत्र के अंतर्गत उनके सहायता केंद्र में प्रकाशित है।",
+      "mr": "मेटा इंडिया तक्रार निवारण अधिकाऱ्याचे तपशील त्यांच्या मदत केंद्रात भारतीय तक्रार निवारण यंत्रणेअंतर्गत उपलब्ध आहेत."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "facebook",
+    "displayName": "Facebook",
+    "howToFindLink": {
+      "en": "Click the three dots (...) on the post or profile, click 'Copy link', or copy the full URL from the browser address bar.",
+      "hi": "पोस्ट या प्रोफाइल पर तीन बिंदुओं (...) पर क्लिक करें, 'Copy link' चुनें, या ब्राउज़र के एड्रेस बार से पूरा URL कॉपी करें।",
+      "mr": "पोस्ट किंवा प्रोफाइलवरील तीन ठिपक्यांवर (...) क्लिक करा, 'Copy link' वर क्लिक करा किंवा ब्राउझरच्या ॲड्रेस बारमधून पूर्ण URL कॉपी करा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Meta Platforms, Inc. maintains a statutory grievance officer for Indian users reachable via in-app forms and dedicated email.",
+      "hi": "मेटा भारतीय उपयोगकर्ताओं के लिए इन-ऐप फॉर्म और समर्पित ईमेल के माध्यम से वैधानिक शिकायत अधिकारी उपलब्ध कराता है।",
+      "mr": "मेटा भारतीय वापरकर्त्यांसाठी इन-ॲप फॉर्म आणि ईमेलद्वारे वैधानिक तक्रार अधिकारी उपलब्ध करते."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "whatsapp",
+    "displayName": "WhatsApp",
+    "howToFindLink": {
+      "en": "WhatsApp chats are end-to-end encrypted. Long-press the offending message, select 'Report', or export chat text (without media) and record the sender's phone number.",
+      "hi": "व्हाट्सएप चैट एंड-टू-एंड एन्क्रिप्टेड हैं। आपत्तिजनक संदेश को देर तक दबाएं, 'Report' चुनें, या चैट एक्सपोर्ट करें और भेजने वाले का फोन नंबर नोट करें।",
+      "mr": "व्हॉट्सॲप चॅट्स एंड-टू-एंड एन्क्रिप्टेड असतात. संदेशावर दाबून धरा, 'Report' निवडा, किंवा चॅट एक्सपोर्ट करा आणि पाठवणाऱ्याचा फोन नंबर नोंदवा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "WhatsApp India Grievance Officer can be contacted via the Help Settings within WhatsApp or the official grievance page.",
+      "hi": "व्हाट्सएप इंडिया शिकायत अधिकारी से व्हाट्सएप सेटिंग्स के सहायता अनुभाग या आधिकारिक शिकायत पृष्ठ से संपर्क किया जा सकता है।",
+      "mr": "व्हॉट्सॲप इंडिया तक्रार निवारण अधिकाऱ्याशी व्हॉट्सॲपच्या मदत विभागातून किंवा अधिकृत तक्रार पृष्ठावरून संपर्क साधता येतो."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "telegram",
+    "displayName": "Telegram",
+    "howToFindLink": {
+      "en": "Right-click or tap-and-hold the channel/group message, select 'Copy Link' (e.g. t.me/channel/123), and record the exact channel/user identifier.",
+      "hi": "चैनल/ग्रुप संदेश पर राइट-क्लिक करें या देर तक दबाएं, 'Copy Link' चुनें (जैसे t.me/channel/123), और चैनल/यूजर का सटीक नाम नोट करें।",
+      "mr": "चॅनेल/ग्रुप मेसेजवर राईट-क्लिक करा किंवा दाबून ठेवा, 'Copy Link' निवडा (उदा. t.me/channel/123) आणि चॅनेल/वापरकर्ता नाव नोंदवा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Telegram designates an email and in-app reporting route for child abuse and non-consensual content removal in India.",
+      "hi": "टेलीग्राम भारत में बाल शोषण और गैर-सहमति सामग्री हटाने के लिए एक ईमेल और इन-ऐप रिपोर्टिंग मार्ग निर्दिष्ट करता है।",
+      "mr": "टेलिग्राम भारतात बाल शोषण आणि अनधिकृत सामग्री हटवण्यासाठी ईमेल आणि इन-ॲप रिपोर्टिंग मार्ग उपलब्ध करतो."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "x-twitter",
+    "displayName": "X (formerly Twitter)",
+    "howToFindLink": {
+      "en": "Click the share icon on the post/tweet and select 'Copy Link', or copy the post URL from your browser address bar.",
+      "hi": "पोस्ट/ट्वीट पर शेयर आइकन पर क्लिक करें और 'Copy Link' चुनें, या अपने ब्राउज़र के एड्रेस बार से URL कॉपी करें।",
+      "mr": "पोस्ट/ट्विटवरील शेअर चिन्हावर क्लिक करा आणि 'Copy Link' निवडा, किंवा ब्राउझर ॲड्रेस बारमधून URL कॉपी करा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "X Corp. maintains an India Resident Grievance Officer accessible through the Help Center report portal.",
+      "hi": "X Corp. अपने सहायता केंद्र रिपोर्ट पोर्टल के माध्यम से भारत निवासी शिकायत अधिकारी प्रदान करता है।",
+      "mr": "X Corp. मदत केंद्र रिपोर्ट पोर्टलद्वारे भारतात निवासी तक्रार अधिकारी उपलब्ध करते."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "youtube",
+    "displayName": "YouTube",
+    "howToFindLink": {
+      "en": "Click 'Share' underneath the video/short and select 'Copy link', or copy the web address from the address bar.",
+      "hi": "वीडियो/शॉर्ट के नीचे 'Share' पर क्लिक करें और 'Copy link' चुनें, या एड्रेस बार से वेब पता कॉपी करें।",
+      "mr": "व्हिडिओ/शॉर्ट खालील 'Share' वर क्लिक करा आणि 'Copy link' निवडा, किंवा ॲड्रेस बारवरून वेब पत्ता कॉपी करा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Google / YouTube has a dedicated India Grievance Redressal mechanism under IT Rules 2021 available in their Legal Help pages.",
+      "hi": "गूगल / यूट्यूब के पास आईटी नियम 2021 के तहत उनके कानूनी सहायता पृष्ठों में समर्पित भारत शिकायत निवारण तंत्र है।",
+      "mr": "गुगल / युट्यूबकडे आयटी नियम २०२१ अंतर्गत त्यांच्या कायदेशीर मदत पृष्ठांवर समर्पित तक्रार निवारण यंत्रणा आहे."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "snapchat",
+    "displayName": "Snapchat",
+    "howToFindLink": {
+      "en": "For public Spotlight or Stories, tap the Share button and select 'Copy Link'. For private snaps, record the username and timestamp.",
+      "hi": "सार्वजनिक स्पॉटलाइट या स्टोरीज के लिए, शेयर बटन पर टैप करें और 'Copy Link' चुनें। निजी स्नैप्स के लिए, यूजरनेम और समय नोट करें।",
+      "mr": "सार्वजनिक स्पॉटलाइट किंवा स्टोरीजसाठी शेअर बटणावर टॅप करा आणि 'Copy Link' निवडा. खाजगी स्नॅप्ससाठी युझरनेम आणि वेळ नोंदवा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Snap Group provides an India Grievance Officer email address and in-app safety reporting workflow.",
+      "hi": "स्नैप ग्रुप भारत शिकायत अधिकारी का ईमेल पता और इन-ऐप सुरक्षा रिपोर्टिंग प्रक्रिया प्रदान करता है।",
+      "mr": "स्नॅप ग्रुप भारतासाठी तक्रार अधिकारी ईमेल आणि इन-ॲप सुरक्षा तक्रार प्रक्रिया प्रदान करतो."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "reddit",
+    "displayName": "Reddit",
+    "howToFindLink": {
+      "en": "Click the 'Share' button under the Reddit post or comment and select 'Copy link', or copy from the browser address bar.",
+      "hi": "रेडिट पोस्ट या टिप्पणी के नीचे 'Share' बटन पर क्लिक करें और 'Copy link' चुनें, या ब्राउज़र एड्रेस बार से कॉपी करें।",
+      "mr": "रेडिट पोस्ट किंवा कमेंटखालील 'Share' बटणावर क्लिक करा आणि 'Copy link' निवडा, किंवा ब्राउझर ॲड्रेस बारवरून कॉपी करा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Reddit has an official NCII report webform and India Grievance Officer contact form.",
+      "hi": "रेडिट के पास एक आधिकारिक NCII रिपोर्ट वेबफ़ॉर्म और भारत शिकायत अधिकारी संपर्क फ़ॉर्म है।",
+      "mr": "रेडिटकडे अधिकृत NCII रिपोर्ट वेबफॉर्म आणि भारत तक्रार अधिकारी संपर्क फॉर्म आहे."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "google-search",
+    "displayName": "Google Search (De-listing)",
+    "howToFindLink": {
+      "en": "In Google Search results, right-click the result title or click the three dots next to the URL and select 'Copy link address'.",
+      "hi": "गूगल सर्च परिणामों में, परिणाम शीर्षक पर राइट-क्लिक करें या URL के पास तीन बिंदुओं पर क्लिक करके 'Copy link address' चुनें।",
+      "mr": "गुगल सर्च निकालांमध्ये, निकालाच्या शीर्षकावर राईट-क्लिक करा किंवा URL जवळील तीन ठिपक्यांवर क्लिक करून 'Copy link address' निवडा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Google provides a dedicated legal removal form specifically for removing personal non-consensual explicit imagery from Google Search results.",
+      "hi": "गूगल व्यक्तिगत गैर-सहमति स्पष्ट छवियों को गूगल खोज परिणामों से हटाने के लिए एक समर्पित कानूनी फ़ॉर्म प्रदान करता है।",
+      "mr": "गुगल शोध निकालांमधून संमती नसलेली वैयक्तिक चित्रे काढण्यासाठी एक समर्पित कायदेशीर फॉर्म प्रदान करतो."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "other",
+    "displayName": "Other Platform / Website",
+    "howToFindLink": {
+      "en": "Copy the full URL from the browser address bar (including https://). Document the exact page location and server host.",
+      "hi": "ब्राउज़र के एड्रेस बार से पूरा URL कॉपी करें (https:// सहित)। सटीक पेज और होस्ट की जानकारी नोट करें।",
+      "mr": "ब्राउझर ॲड्रेस बारवरून पूर्ण URL कॉपी करा (https:// सह). अचूक वेबपेज व होस्ट नोंदवून ठेवा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Locate the platform's 'Contact Us', 'Terms of Service', or 'Grievance Officer' page on their website footer.",
+      "hi": "वेबसाइट के नीचे (फुटर) में 'संपर्क करें', 'सेवा की शर्तें' या 'शिकायत अधिकारी' पेज खोजें।",
+      "mr": "वेबसाइटच्या तळाशी (फुटर) 'Contact Us', 'Terms' किंवा 'Grievance Officer' पेज शोधा."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01"
+  },
+  {
+    "id": "gac",
+    "displayName": "Grievance Appellate Committee (GAC)",
+    "howToFindLink": {
+      "en": "Use the ticket ID / reference number received from your initial platform complaint to file an appeal.",
+      "hi": "अपील दायर करने के लिए अपनी प्रारंभिक प्लेटफ़ॉर्म शिकायत से प्राप्त टिकट आईडी / संदर्भ संख्या का उपयोग करें।",
+      "mr": "अपील दाखल करण्यासाठी आपल्या सुरुवातीच्या प्लॅटफॉर्म तक्रारीतून मिळालेला तिकीट आयडी / संदर्भ क्रमांक वापरा."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Statutory appellate body established under IT Rules 2021 to hear appeals against intermediary decisions or failure to act within 24 hours.",
+      "hi": "आईटी नियम 2021 के तहत स्थापित वैधानिक अपीलीय निकाय जो मध्यस्थ के निर्णयों या 24 घंटे में कार्रवाई न करने के खिलाफ अपील सुनता है।",
+      "mr": "आयटी नियम २०२१ अंतर्गत स्थापन केलेली वैधानिक अपीलीय समिती जी प्लॅटफॉर्मच्या निर्णयांविरुद्ध किंवा २४ तासांत कारवाई न झाल्यास अपील ऐकते."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01",
+    "specialBadge": {
+      "en": "Check availability and eligibility",
+      "hi": "उपलब्धता और पात्रता जांचें",
+      "mr": "उपलब्धता आणि पात्रता तपासा"
+    }
+  },
+  {
+    "id": "stopncii",
+    "displayName": "StopNCII.org (Hash Prevention)",
+    "howToFindLink": {
+      "en": "Operates by generating client-side non-reversible cryptographic hashes (digital fingerprints) of intimate images directly on your device.",
+      "hi": "आपके डिवाइस पर सीधे अंतरंग छवियों के अपरिवर्तनीय डिजिटल फिंगरप्रिंट (हैश) बनाकर काम करता है, ताकि वे मंचों पर साझा न हो सकें।",
+      "mr": "आपल्या उपकरणावरच डिजिटल हॅश (फिंगरप्रिंट) तयार करून कार्य करते, जेणेकरून ते इतर प्लॅटफॉर्मवर पसरू नयेत."
+    },
+    "reportingPageUrl": null,
+    "grievanceOfficerNote": {
+      "en": "Global hash-sharing platform run by SWGfL for adults (18+) to prevent non-consensual sharing across participating tech companies.",
+      "hi": "वयस्कों (18+) के लिए SWGfL द्वारा संचालित वैश्विक हैश-शेयरिंग प्लेटफॉर्म जो भाग लेने वाली टेक कंपनियों पर छवियों को फैलने से रोकता है।",
+      "mr": "१८ वर्षांवरील प्रौढांसाठी SWGfL द्वारे चालवले जाणारे जागतिक हॅश प्लॅटफॉर्म, जे सहभागी टेक कंपन्यांवर प्रसार रोखते."
+    },
+    "verified": false,
+    "lastVerified": "2026-03-01",
+    "specialBadge": {
+      "en": "Check availability and eligibility",
+      "hi": "उपलब्धता और पात्रता जांचें",
+      "mr": "उपलब्धता आणि पात्रता तपासा"
+    }
+  }
+]

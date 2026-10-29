@@ -1,0 +1,85 @@
+{
+  "takedownHours": 24,
+  "statute": "Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021",
+  "ruleCitation": "Rule 3(2)(b)",
+  "legalReferences": [
+    {
+      "id": "it-rules-2021-rule-3-2-b",
+      "title": {
+        "en": "Rule 3(2)(b) of the IT Rules, 2021",
+        "hi": "आईटी नियम, 2021 का नियम 3(2)(ख)",
+        "mr": "आयटी नियम, 2021 चा नियम 3(2)(b)"
+      },
+      "citation": "Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, Rule 3(2)(b)",
+      "summary": {
+        "en": "Intermediaries must remove or disable access to reported intimate, nude, sexual, or morphed/deepfake content within 24 hours of receipt of a complaint.",
+        "hi": "मध्यस्थों (सोशल मीडिया मंचों) को शिकायत मिलने के 24 घंटे के भीतर अंतरंग, नग्न, यौन या मॉर्फ/डीपफेक सामग्री को हटाना या उसकी पहुंच निष्क्रिय करना अनिवार्य है।",
+        "mr": "तक्रार प्राप्त झाल्यानंतर २४ तासांच्या आत मध्यस्थांनी (प्लॅटफॉर्म्सनी) लैंगिकदृष्ट्या स्पष्ट, नग्न, किंवा मॉर्फ/डीपफेक सामग्री काढून टाकणे किंवा तिचा ॲक्सेस बंद करणे बंधनकारक आहे."
+      },
+      "sourceUrl": "https://www.meity.gov.in",
+      "verified": true,
+      "lastVerified": "2026-03-01"
+    },
+    {
+      "id": "meity-sop-ncii-2025",
+      "title": {
+        "en": "MeitY Standard Operating Procedure on NCII (11 November 2025)",
+        "hi": "एनसीआईआई (NCII) पर इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय की मानक संचालन प्रक्रिया (11 नवंबर 2025)",
+        "mr": "इलेक्ट्रॉनिक्स आणि माहिती तंत्रज्ञान मंत्रालयाची NCII वरील प्रमाणित कार्यप्रणाली (11 नोव्हेंबर 2025)"
+      },
+      "citation": "Ministry of Electronics and Information Technology (MeitY) SOP on Non-Consensual Intimate Imagery, 11 Nov 2025",
+      "summary": {
+        "en": "Standardized procedural guidance for victims, intermediaries, law enforcement agencies, and cyber cells to execute immediate takedowns of non-consensual intimate imagery.",
+        "hi": "सहमति के बिना साझा की गई अंतरंग छवियों को तुरंत हटाने के लिए पीड़ितों, मध्यस्थों, कानून प्रवर्तन एजेंसियों और साइबर सेल के लिए मानकीकृत प्रक्रियात्मक मार्गदर्शन।",
+        "mr": "संमती नसलेली खाजगी छायाचित्रे/व्हिडिओ त्वरित हटवण्यासाठी पीडित, प्लॅटफॉर्म, पोलिस आणि सायबर सेलसाठी प्रमाणित मार्गदर्शक कार्यप्रणाली."
+      },
+      "sourceUrl": "https://www.meity.gov.in/static/uploads/2025/11/a2c9500ef5f8b62a43bfc68747de592d.pdf",
+      "verified": true,
+      "lastVerified": "2026-03-01"
+    }
+  ],
+  "escalationLadder": [
+    {
+      "level": 1,
+      "name": {
+        "en": "Platform In-App & Grievance Officer Report",
+        "hi": "मंच (प्लेटफ़ॉर्म) की इन-ऐप रिपोर्ट और शिकायत अधिकारी",
+        "mr": "प्लॅटफॉर्म इन-ॲप रिपोर्ट आणि तक्रार निवारण अधिकारी"
+      },
+      "action": {
+        "en": "Submit formal 24-hour Rule 3(2)(b) notice with content URLs, timestamps, and statutory declaration directly to the intermediary.",
+        "hi": "कंटेंट के यूआरएल (URL), समय और वैधानिक घोषणा के साथ मध्यस्थ को सीधे 24-घंटे का नियम 3(2)(ख) नोटिस भेजें।",
+        "mr": "सामग्रीचे URL, वेळ आणि कायदेशीर विधानासह प्लॅटफॉर्मला थेट २४ तासांची नियम 3(2)(b) नोटीस पाठवा."
+      },
+      "timeframeHours": 24
+    },
+    {
+      "level": 2,
+      "name": {
+        "en": "Grievance Appellate Committee (GAC) Appeal",
+        "hi": "शिकायत अपीलीय समिति (GAC) अपील",
+        "mr": "तक्रार अपीलीय समिती (GAC) अपील"
+      },
+      "action": {
+        "en": "If intermediary fails to act within 24 hours or rejects the valid complaint, appeal to the Grievance Appellate Committee (GAC).",
+        "hi": "यदि मध्यस्थ 24 घंटे में कार्रवाई करने में विफल रहता है या शिकायत खारिज करता है, तो शिकायत अपीलीय समिति (GAC) में अपील करें।",
+        "mr": "जर प्लॅटफॉर्मने २४ तासांत कारवाई केली नाही किंवा तक्रार फेटाळली, तर तक्रार अपीलीय समितीकडे (GAC) अपील करा."
+      },
+      "timeframeHours": 48
+    },
+    {
+      "level": 3,
+      "name": {
+        "en": "National Cybercrime Portal & Police First Information Report (FIR)",
+        "hi": "राष्ट्रीय साइबर अपराध पोर्टल और पुलिस प्राथमिकी (FIR)",
+        "mr": "राष्ट्रीय सायबर गुन्हे पोर्टल आणि पोलिस तक्रार (FIR)"
+      },
+      "action": {
+        "en": "Escalate to the National Cybercrime Reporting Portal (cybercrime.gov.in / Helpline 1930) and lodge a police complaint at the nearest police station or cyber cell.",
+        "hi": "राष्ट्रीय साइबर अपराध रिपोर्टिंग पोर्टल (cybercrime.gov.in / हेल्पलाइन 1930) पर शिकायत दर्ज करें और नजदीकी पुलिस स्टेशन या साइबर सेल में प्राथमिकी दर्ज कराएं।",
+        "mr": "राष्ट्रीय सायबर गुन्हे रिपोर्टिंग पोर्टल (cybercrime.gov.in / हेल्पलाईन 1930) वर नोंदवा आणि जवळच्या पोलिस ठाण्यात किंवा सायबर सेलमध्ये तक्रार दाखल करा."
+      },
+      "timeframeHours": 72
+    }
+  ]
+}

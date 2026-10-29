@@ -1,0 +1,105 @@
+:root {
+  /* Trauma-informed calm palette: deep slate, soothing teal, soft amber */
+  --color-bg: #0f172a;
+  --color-fg: #f8fafc;
+  --color-card: #1e293b;
+  --color-card-fg: #f1f5f9;
+  --color-surface: #334155;
+  --color-border: #475569;
+  --color-muted: #1e293b;
+  --color-muted-fg: #94a3b8;
+
+  /* Primary brand: Calming, steady teal */
+  --color-primary: #0d9488;
+  --color-primary-hover: #14b8a6;
+  --color-primary-fg: #ffffff;
+
+  /* Secondary: Soft slate */
+  --color-secondary: #334155;
+  --color-secondary-fg: #f8fafc;
+
+  /* Accent: Sky blue */
+  --color-accent: #0284c7;
+  --color-accent-fg: #ffffff;
+
+  /* Warning: Warm amber (no aggressive red walls) */
+  --color-warning: #d97706;
+  --color-warning-fg: #ffffff;
+  --color-warning-surface: #451a03;
+
+  /* Danger: Muted rose (used sparingly for critical destructive actions) */
+  --color-danger: #e11d48;
+  --color-danger-fg: #ffffff;
+  --color-danger-surface: #4c0519;
+
+  /* Success: Forest emerald */
+  --color-success: #059669;
+  --color-success-fg: #ffffff;
+  --color-success-surface: #064e3b;
+
+  --radius: 0.5rem;
+  --font-scale: 1;
+}
+
+/* Light / High-contrast mode */
+[data-theme='light'] {
+  --color-bg: #f8fafc;
+  --color-fg: #0f172a;
+  --color-card: #ffffff;
+  --color-card-fg: #0f172a;
+  --color-surface: #f1f5f9;
+  --color-border: #cbd5e1;
+  --color-muted: #f1f5f9;
+  --color-muted-fg: #64748b;
+
+  --color-primary: #0f766e;
+  --color-primary-hover: #115e59;
+  --color-primary-fg: #ffffff;
+
+  --color-secondary: #e2e8f0;
+  --color-secondary-fg: #1e293b;
+
+  --color-accent: #0369a1;
+  --color-accent-fg: #ffffff;
+
+  --color-warning: #b45309;
+  --color-warning-fg: #ffffff;
+  --color-warning-surface: #fef3c7;
+
+  --color-danger: #be123c;
+  --color-danger-fg: #ffffff;
+  --color-danger-surface: #ffe4e6;
+
+  --color-success: #047857;
+  --color-success-fg: #ffffff;
+  --color-success-surface: #d1fae5;
+}
+
+/* Accessibility: High-contrast override */
+[data-contrast='high'] {
+  --color-bg: #000000 !important;
+  --color-fg: #ffffff !important;
+  --color-card: #000000 !important;
+  --color-card-fg: #ffffff !important;
+  --color-border: #ffffff !important;
+  --color-primary: #ffff00 !important;
+  --color-primary-fg: #000000 !important;
+  --color-warning: #ffa500 !important;
+  --color-warning-fg: #000000 !important;
+  --color-danger: #ff5555 !important;
+  --color-danger-fg: #000000 !important;
+}
+
+/* Accessibility: Text Scaling */
+[data-text-size='large'] {
+  --font-scale: 1.2;
+}
+
+[data-text-size='xlarge'] {
+  --font-scale: 1.4;
+}
+
+/* Apply font scale to base typography */
+body {
+  font-size: calc(1rem * var(--font-scale));
+}

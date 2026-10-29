@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlanStepsConfig",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["stepNumber", "id", "urgency", "title", "summary", "points"],
+    "properties": {
+      "stepNumber": { "type": "integer" },
+      "id": { "type": "string" },
+      "urgency": { "type": "string", "enum": ["immediate", "high", "critical", "normal"] },
+      "title": {
+        "type": "object",
+        "required": ["en", "hi", "mr"],
+        "properties": {
+          "en": { "type": "string", "minLength": 1 },
+          "hi": { "type": "string", "minLength": 1 },
+          "mr": { "type": "string", "minLength": 1 }
+        }
+      },
+      "summary": {
+        "type": "object",
+        "required": ["en", "hi", "mr"],
+        "properties": {
+          "en": { "type": "string", "minLength": 1 },
+          "hi": { "type": "string", "minLength": 1 },
+          "mr": { "type": "string", "minLength": 1 }
+        }
+      },
+      "points": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["en", "hi", "mr"],
+          "properties": {
+            "en": { "type": "string", "minLength": 1 },
+            "hi": { "type": "string", "minLength": 1 },
+            "mr": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}
