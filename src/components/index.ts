@@ -16,3 +16,5 @@ export * from './Banner';
 export * from './Accordion';
 export * from './CopyButton';
 export * from './PanicButton';
+export * from './ExternalLinkModal';
+

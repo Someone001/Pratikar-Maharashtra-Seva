@@ -7,6 +7,7 @@ export default {
       colors: {
         background: 'var(--color-bg)',
         foreground: 'var(--color-fg)',
+        surface: 'var(--color-surface)',
         muted: 'var(--color-muted)',
         'muted-foreground': 'var(--color-muted-fg)',
         card: 'var(--color-card)',
@@ -55,3 +56,4 @@ export default {
   },
   plugins: [],
 };
+

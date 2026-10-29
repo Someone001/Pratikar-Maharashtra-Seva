@@ -2,27 +2,33 @@ import React, { useState } from 'react';
 import { Button, type ButtonProps } from './Button';
 
 export interface CopyButtonProps extends Omit<ButtonProps, 'onClick'> {
-  textToCopy: string;
+  textToCopy?: string;
+  text?: string;
   copyLabel?: string;
   copiedLabel?: string;
+  label?: string;
   onCopySuccess?: () => void;
 }
 
 export const CopyButton: React.FC<CopyButtonProps> = ({
   textToCopy,
-  copyLabel = 'Copy',
+  text,
+  copyLabel,
   copiedLabel = 'Copied!',
+  label,
   onCopySuccess,
   variant = 'secondary',
   size = 'sm',
   className = '',
   ...props
 }) => {
+  const contentToCopy = textToCopy || text || '';
+  const displayLabel = label || copyLabel || 'Copy';
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(textToCopy);
+      await navigator.clipboard.writeText(contentToCopy);
       setCopied(true);
       onCopySuccess?.();
       setTimeout(() => setCopied(false), 2000);
@@ -37,7 +43,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({
       variant={copied ? 'primary' : variant}
       size={size}
       onClick={handleCopy}
-      aria-label={copied ? copiedLabel : copyLabel}
+      aria-label={copied ? copiedLabel : displayLabel}
       className={`transition-all ${className}`}
       leftIcon={
         copied ? (
@@ -57,7 +63,8 @@ export const CopyButton: React.FC<CopyButtonProps> = ({
       }
       {...props}
     >
-      <span aria-live="polite">{copied ? copiedLabel : copyLabel}</span>
+      <span aria-live="polite">{copied ? copiedLabel : displayLabel}</span>
     </Button>
   );
 };
+

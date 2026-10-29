@@ -139,3 +139,32 @@ export async function verifyEvidenceChain(
 
   return { isValid: true };
 }
+
+export async function appendEvidenceEntry(
+  caseId: string,
+  type: EvidenceType,
+  fields: Record<string, unknown>,
+  key: CryptoKey,
+): Promise<EvidenceEntry> {
+  const { getEvidenceByCase, saveEvidenceEntry } = await import('./storage');
+  const existing = await getEvidenceByCase(caseId, key);
+  const entry = await createEvidenceEntry({
+    caseId,
+    type,
+    fields,
+    previousEntries: existing,
+  });
+  await saveEvidenceEntry(entry, key);
+  return entry;
+}
+
+export async function verifyChain(
+  caseId: string,
+  key: CryptoKey,
+): Promise<ChainVerificationResult> {
+  const { getEvidenceByCase } = await import('./storage');
+  const existing = await getEvidenceByCase(caseId, key);
+  return verifyEvidenceChain(existing);
+}
+
+

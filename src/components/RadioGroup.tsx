@@ -9,7 +9,7 @@ export interface RadioOption {
 
 export interface RadioGroupProps {
   name: string;
-  label: string;
+  label?: string;
   options: RadioOption[];
   value: string;
   onChange: (value: string) => void;
@@ -39,10 +39,12 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       className={`space-y-2 border-none p-0 m-0 ${className}`}
       aria-describedby={[hint ? hintId : '', error ? errorId : ''].filter(Boolean).join(' ') || undefined}
     >
-      <legend className="text-sm font-medium text-foreground mb-2">
-        {label}
-        {required && <span className="ml-1 text-danger" aria-hidden="true">*</span>}
-      </legend>
+      {label && (
+        <legend className="text-sm font-medium text-foreground mb-2">
+          {label}
+          {required && <span className="ml-1 text-danger" aria-hidden="true">*</span>}
+        </legend>
+      )}
 
       <div className="space-y-2">
         {options.map((opt) => {
@@ -96,3 +98,4 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     </fieldset>
   );
 };
+

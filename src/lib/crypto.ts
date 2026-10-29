@@ -1,7 +1,8 @@
 import type { EncryptedPayload, Vault } from '../types';
 
 const VERIFIER_SENTINEL = 'PRATIKAR_VAULT_VERIFIED_V1';
-const PBKDF2_ITERATIONS = 100000;
+export const DEFAULT_PBKDF2_ITERATIONS = 600000;
+const PBKDF2_ITERATIONS = DEFAULT_PBKDF2_ITERATIONS;
 
 export function bufferToBase64(buffer: ArrayBuffer | Uint8Array): string {
   const bytes = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer);
@@ -173,3 +174,4 @@ export async function unlockVault(
     return null;
   }
 }
+

@@ -312,3 +312,4 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ activeCase }) => {
     </div>
   );
 };
+

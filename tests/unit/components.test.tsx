@@ -174,3 +174,4 @@ describe('Accessible UI Components', () => {
     window.location = originalLocation;
   });
 });
+

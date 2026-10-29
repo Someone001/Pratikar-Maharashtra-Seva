@@ -59,3 +59,4 @@ if (hasDiscrepancy) {
   console.log(`\n✅ I18n check passed: all ${enKeys.size} keys present across en, hi, mr.`);
   process.exit(0);
 }
+

@@ -49,3 +49,4 @@ export function downloadIcsFile(filename: string, content: string): void {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
+

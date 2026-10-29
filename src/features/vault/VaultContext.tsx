@@ -7,6 +7,7 @@ import {
   saveVaultMetadata,
   logAuditEvent,
   wipeAllData,
+  getSettings,
 } from '../../lib/storage';
 
 export interface VaultContextType {
@@ -15,43 +16,132 @@ export interface VaultContextType {
   activeKey: CryptoKey | null;
   initVault: (passphrase: string) => Promise<boolean>;
   unlock: (passphrase: string) => Promise<boolean>;
-  lock: () => void;
+  lock: (broadcast?: boolean) => void;
+  triggerQuickExit: () => Promise<void>;
   wipe: () => Promise<void>;
   isLoading: boolean;
+  isStorageAvailable: boolean;
 }
 
 const VaultContext = createContext<VaultContextType | null>(null);
 
-const IDLE_TIMEOUT_MS = 15 * 60 * 1000; // 15 minutes
+const BROADCAST_CHANNEL_NAME = 'pratikar_vault_channel';
 
 export const VaultProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [activeKey, setActiveKey] = useState<CryptoKey | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isStorageAvailable, setIsStorageAvailable] = useState<boolean>(true);
 
   const idleTimerRef = useRef<number | null>(null);
+  const broadcastChannelRef = useRef<BroadcastChannel | null>(null);
 
-  const lock = useCallback(() => {
+  const lock = useCallback((broadcast = true) => {
     setActiveKey(null);
     logAuditEvent('lock');
+    if (broadcast && broadcastChannelRef.current) {
+      try {
+        broadcastChannelRef.current.postMessage({ type: 'LOCK' });
+      } catch {
+        // BroadcastChannel may fail in restricted sandboxes
+      }
+    }
   }, []);
 
-  const resetIdleTimer = useCallback(() => {
+  const triggerQuickExit = useCallback(async () => {
+    lock(true);
+    let destination = 'https://www.google.com';
+    try {
+      const settings = await getSettings();
+      if (settings.quickExitUrl) {
+        destination = settings.quickExitUrl;
+      }
+    } catch {
+      // Fallback destination on storage error
+    }
+    // Replace history entry so browser Back does not re-open the app
+    window.location.replace(destination);
+  }, [lock]);
+
+  const resetIdleTimer = useCallback(async () => {
     if (idleTimerRef.current) {
       window.clearTimeout(idleTimerRef.current);
     }
-    if (activeKey) {
+    if (!activeKey) return;
+
+    try {
+      const settings = await getSettings();
+      const minutes = settings.autoLockMinutes ?? 5;
+      if (minutes <= 0) {
+        return; // 'never' selected
+      }
       idleTimerRef.current = window.setTimeout(() => {
-        lock();
-      }, IDLE_TIMEOUT_MS);
+        lock(true);
+      }, minutes * 60 * 1000);
+    } catch {
+      // Default fallback 5 minutes
+      idleTimerRef.current = window.setTimeout(() => {
+        lock(true);
+      }, 5 * 60 * 1000);
     }
   }, [activeKey, lock]);
+
+  // Set up BroadcastChannel for multi-tab lock
+  useEffect(() => {
+    if (typeof BroadcastChannel !== 'undefined') {
+      try {
+        const bc = new BroadcastChannel(BROADCAST_CHANNEL_NAME);
+        bc.onmessage = (event) => {
+          if (event.data?.type === 'LOCK') {
+            lock(false);
+          }
+        };
+        broadcastChannelRef.current = bc;
+      } catch {
+        // Fallback for environments without BroadcastChannel
+      }
+    }
+
+    return () => {
+      if (broadcastChannelRef.current) {
+        broadcastChannelRef.current.close();
+      }
+    };
+  }, [lock]);
+
+  // Global Double-Escape key listener for Panic / Quick Exit
+  useEffect(() => {
+    let lastEscapeTime = 0;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        const openDialog = document.querySelector('dialog[open]');
+        // If a modal dialog is open, let the first Escape close the dialog
+        if (openDialog) {
+          return;
+        }
+
+        const now = Date.now();
+        if (now - lastEscapeTime < 500) {
+          triggerQuickExit();
+        }
+        lastEscapeTime = now;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [triggerQuickExit]);
 
   // Load vault initialization state on mount
   useEffect(() => {
     hasVault()
       .then((exists) => {
         setIsInitialized(exists);
+        setIsStorageAvailable(true);
+      })
+      .catch(() => {
+        setIsStorageAvailable(false);
+        setIsInitialized(false);
       })
       .finally(() => {
         setIsLoading(false);
@@ -64,10 +154,13 @@ export const VaultProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     resetIdleTimer();
 
-    const handleUserActivity = () => resetIdleTimer();
+    const handleUserActivity = () => {
+      resetIdleTimer();
+    };
     const handleVisibilityChange = () => {
+      // Auto-lock when tab is hidden or backgrounded
       if (document.visibilityState === 'hidden') {
-        lock();
+        lock(true);
       }
     };
 
@@ -135,8 +228,10 @@ export const VaultProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         initVault,
         unlock,
         lock,
+        triggerQuickExit,
         wipe,
         isLoading,
+        isStorageAvailable,
       }}
     >
       {children}
@@ -151,3 +246,4 @@ export function useVault(): VaultContextType {
   }
   return ctx;
 }
+

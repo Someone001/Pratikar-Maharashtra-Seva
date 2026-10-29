@@ -7,7 +7,10 @@ export interface AccordionItemData {
 }
 
 export interface AccordionProps {
-  items: AccordionItemData[];
+  items?: AccordionItemData[];
+  title?: React.ReactNode;
+  children?: React.ReactNode;
+  defaultOpen?: boolean;
   defaultOpenId?: string;
   allowMultiple?: boolean;
   className?: string;
@@ -15,11 +18,50 @@ export interface AccordionProps {
 
 export const Accordion: React.FC<AccordionProps> = ({
   items,
+  title,
+  children,
+  defaultOpen = false,
   defaultOpenId,
   allowMultiple = false,
   className = '',
 }) => {
+  const [openSingle, setOpenSingle] = useState(defaultOpen);
   const [openIds, setOpenIds] = useState<string[]>(defaultOpenId ? [defaultOpenId] : []);
+
+  if (title && children) {
+    const singleId = 'accordion-single-panel';
+    return (
+      <div className={`rounded-xl border border-border bg-card overflow-hidden transition-all ${className}`}>
+        <button
+          type="button"
+          aria-expanded={openSingle}
+          aria-controls={singleId}
+          onClick={() => setOpenSingle(!openSingle)}
+          className="flex w-full items-center justify-between p-4 text-left font-medium text-foreground hover:bg-surface/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          <span className="text-sm font-semibold">{title}</span>
+          <svg
+            className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${
+              openSingle ? 'rotate-180 text-primary' : ''
+            }`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        {openSingle && (
+          <div id={singleId} className="px-4 pb-4 pt-1 text-sm text-foreground/80 border-t border-border/40">
+            {children}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const effectiveItems = items || [];
 
   const toggleItem = (id: string) => {
     setOpenIds((prev) => {
@@ -32,7 +74,7 @@ export const Accordion: React.FC<AccordionProps> = ({
 
   return (
     <div className={`space-y-2.5 ${className}`}>
-      {items.map((item) => {
+      {effectiveItems.map((item) => {
         const isOpen = openIds.includes(item.id);
         const headerId = `accordion-header-${item.id}`;
         const panelId = `accordion-panel-${item.id}`;
@@ -78,3 +120,4 @@ export const Accordion: React.FC<AccordionProps> = ({
     </div>
   );
 };
+

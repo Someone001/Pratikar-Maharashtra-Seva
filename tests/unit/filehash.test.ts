@@ -21,3 +21,4 @@ describe('Local File Hasher Utility', () => {
     expect(result.sha256).toBe(expectedHash);
   });
 });
+

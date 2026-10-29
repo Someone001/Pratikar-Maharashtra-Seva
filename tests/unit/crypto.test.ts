@@ -67,7 +67,7 @@ describe('Web Crypto Engine', () => {
     const { vault, key } = await createVault(passphrase);
 
     expect(vault.version).toBe(1);
-    expect(vault.kdf.iterations).toBe(100000);
+    expect(vault.kdf.iterations).toBe(600000); // Section 14: at least 600,000 iterations
     expect(vault.kdf.salt).toBeDefined();
     expect(key).toBeDefined();
 
@@ -80,3 +80,4 @@ describe('Web Crypto Engine', () => {
     expect(badKey).toBeNull();
   });
 });
+

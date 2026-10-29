@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 export interface CountdownProps {
-  submittedAt: string; // ISO 8601 string
+  submittedAt?: string; // ISO 8601 string
   dueAt?: string; // Optional pre-calculated deadline, defaults to submittedAt + 24 hours
+  deadline?: string;
+  label?: string;
   onExpire?: () => void;
   className?: string;
 }
@@ -10,12 +12,17 @@ export interface CountdownProps {
 export const Countdown: React.FC<CountdownProps> = ({
   submittedAt,
   dueAt,
+  deadline,
+  label,
   onExpire,
   className = '',
 }) => {
-  const targetDate = dueAt
-    ? new Date(dueAt).getTime()
-    : new Date(submittedAt).getTime() + 24 * 60 * 60 * 1000;
+  const effectiveDeadline = deadline || dueAt;
+  const targetDate = effectiveDeadline
+    ? new Date(effectiveDeadline).getTime()
+    : submittedAt
+      ? new Date(submittedAt).getTime() + 24 * 60 * 60 * 1000
+      : Date.now() + 24 * 60 * 60 * 1000;
 
   const totalDurationMs = 24 * 60 * 60 * 1000;
 
@@ -74,7 +81,7 @@ export const Countdown: React.FC<CountdownProps> = ({
               aria-hidden="true"
             />
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              {isExpired ? 'Statutory 24h Window Expired' : 'Statutory 24-Hour Removal Deadline'}
+              {label || (isExpired ? 'Statutory 24h Window Expired' : 'Statutory 24-Hour Removal Deadline')}
             </span>
           </div>
 
@@ -118,3 +125,4 @@ export const Countdown: React.FC<CountdownProps> = ({
     </div>
   );
 };
+

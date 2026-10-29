@@ -107,3 +107,4 @@ if (totalErrors > 0) {
   console.log('\nAll data configuration files are valid and fully translated.');
   process.exit(0);
 }
+

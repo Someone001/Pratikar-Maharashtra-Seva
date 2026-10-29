@@ -32,6 +32,9 @@ export interface PlaintextSettings {
   highContrast: boolean;
   reducedMotion: boolean;
   camouflageMode: boolean;
+  autoLockMinutes: number; // 1, 5, 15, or -1 (never)
+  quickExitUrl?: string; // default https://www.google.com
+  devanagariNumerals?: boolean;
 }
 
 export type IncidentSituation =
@@ -148,3 +151,4 @@ export interface AuditEvent {
   type: AuditAction;
   timestamp: string; // ISO UTC
 }
+

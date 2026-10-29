@@ -9,8 +9,9 @@ test.describe('Pratikar PWA E2E Journey', () => {
     await expect(page.getByText('What Pratikar is NOT')).toBeVisible();
     await expect(page.getByText('Rule 3(2)(b)')).toBeVisible();
 
-    // Advance to Age Verification
-    await page.getByRole('button', { name: /continue/i }).click();
+    // Advance to Safety Check 1
+    await page.getByRole('button', { name: /start/i }).click();
+    await page.getByText('Yes, I am safe right now').click();
     await expect(page.getByText('Age Safety Verification')).toBeVisible();
 
     // 2. Test Minor Protection Stop Safeguard
@@ -51,7 +52,7 @@ test.describe('Pratikar PWA E2E Journey', () => {
     // Jump to Step 3: Takedown Notice
     await page.getByRole('button', { name: /Send 24-Hour/i }).click();
     await expect(page.getByText('Target Platform for Complaint:')).toBeVisible();
-    await expect(page.getByText('URGENT STATUTORY NOTICE')).toBeVisible();
+    await expect(page.getByText('Generate Platform Takedown Notice')).toBeVisible();
     await expect(page.getByText('Rule 3(2)(b)').first()).toBeVisible();
 
     // Copy legal notice
@@ -76,7 +77,7 @@ test.describe('Pratikar PWA E2E Journey', () => {
     await expect(page.getByText('Hash chain verified: all cryptographic links intact.')).toBeVisible();
 
     // 7. Case Summary for Law Enforcement Printout
-    await page.getByRole('link', { name: 'Summary' }).click();
+    await page.getByRole('link', { name: 'Documents' }).click();
     await expect(page.getByText('NCII Redress & Evidence Summary')).toBeVisible();
     await expect(page.getByText('Instagram Threat Incident')).toBeVisible();
     await expect(page.getByText('SHA-256 Chain Intact')).toBeVisible();

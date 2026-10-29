@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'verified' | 'unverified' | 'neutral' | 'info' | 'warning' | 'danger';
+  variant?: 'verified' | 'unverified' | 'neutral' | 'info' | 'warning' | 'danger' | 'success' | 'default';
   size?: 'sm' | 'md';
 }
 
@@ -16,9 +16,11 @@ export const Badge: React.FC<BadgeProps> = ({
     verified: 'bg-emerald-950/80 text-emerald-300 border-emerald-700/60 font-medium',
     unverified: 'bg-amber-950/80 text-amber-300 border-amber-700/60 font-medium',
     neutral: 'bg-surface text-muted-foreground border-border',
+    default: 'bg-surface text-muted-foreground border-border',
     info: 'bg-sky-950/80 text-sky-300 border-sky-700/60',
     warning: 'bg-amber-950/80 text-amber-300 border-amber-700/60',
     danger: 'bg-rose-950/80 text-rose-300 border-rose-700/60',
+    success: 'bg-emerald-950/80 text-emerald-300 border-emerald-700/60 font-medium',
   };
 
   const sizeStyles = {
@@ -45,3 +47,4 @@ export const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
+

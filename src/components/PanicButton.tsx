@@ -58,3 +58,4 @@ export const PanicButton: React.FC<PanicButtonProps> = ({
     </button>
   );
 };
+

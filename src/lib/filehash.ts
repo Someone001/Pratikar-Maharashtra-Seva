@@ -46,3 +46,5 @@ export async function hashFileLocally(file: File): Promise<FileHashResult> {
     sha256,
   };
 }
+
+export { hashFileLocally as hashFileInBrowser };

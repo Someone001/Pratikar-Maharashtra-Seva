@@ -28,9 +28,15 @@ describe('Milestone 4: Vault & Onboarding Flow', () => {
     expect(screen.getByText(/what pratikar does/i)).toBeInTheDocument();
     expect(screen.getByText(/what pratikar is not/i)).toBeInTheDocument();
 
-    const continueBtn = screen.getByRole('button', { name: /continue/i });
-    fireEvent.click(continueBtn);
+    // Advance to Safety Check 1
+    const startBtn = screen.getByRole('button', { name: /start/i });
+    fireEvent.click(startBtn);
 
+    // Confirm immediate physical safety
+    const safeNowBtn = screen.getByText(/yes, i am safe right now/i);
+    fireEvent.click(safeNowBtn);
+
+    // Now on Safety Check 2 (Age gate)
     expect(screen.getByText(/age safety verification/i)).toBeInTheDocument();
   });
 
@@ -42,14 +48,15 @@ describe('Milestone 4: Vault & Onboarding Flow', () => {
     );
 
     // Proceed to age check
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }));
+    fireEvent.click(screen.getByRole('button', { name: /start/i }));
+    fireEvent.click(screen.getByText(/yes, i am safe right now/i));
 
     // Select under 18
     const under18Btn = screen.getByText(/under 18/i);
     fireEvent.click(under18Btn);
 
     // Child protection stop view
-    expect(screen.getByText(/special protection required for minors/i)).toBeInTheDocument();
+    expect(screen.getByText(/specialized child protection route required/i)).toBeInTheDocument();
     expect(screen.getAllByText(/1098/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/cybercrime\.gov\.in/i).length).toBeGreaterThan(0);
   });
@@ -62,8 +69,9 @@ describe('Milestone 4: Vault & Onboarding Flow', () => {
       </TestApp>,
     );
 
-    // Advance to age check
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }));
+    // Advance through two safety checks
+    fireEvent.click(screen.getByRole('button', { name: /start/i }));
+    fireEvent.click(screen.getByText(/yes, i am safe right now/i));
 
     // Select 18+
     fireEvent.click(screen.getByText(/18 or older/i));

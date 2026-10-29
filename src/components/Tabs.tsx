@@ -3,7 +3,7 @@ import React from 'react';
 export interface TabItem {
   id: string;
   label: React.ReactNode;
-  content: React.ReactNode;
+  content?: React.ReactNode;
   badge?: React.ReactNode;
   disabled?: boolean;
 }
@@ -90,15 +90,18 @@ export const Tabs: React.FC<TabsProps> = ({
         })}
       </div>
 
-      <div
-        id={`panel-${activeTab}`}
-        role="tabpanel"
-        aria-labelledby={`tab-${activeTab}`}
-        className="pt-4 focus:outline-none"
-        tabIndex={0}
-      >
-        {activeContent}
-      </div>
+      {activeContent !== undefined && (
+        <div
+          id={`panel-${activeTab}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${activeTab}`}
+          className="pt-4 focus:outline-none"
+          tabIndex={0}
+        >
+          {activeContent}
+        </div>
+      )}
     </div>
   );
 };
+

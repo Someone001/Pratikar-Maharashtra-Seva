@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useI18n } from '../../lib/i18n';
 import { useVault } from './VaultContext';
 import {
@@ -9,7 +9,6 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-  Field,
   Dialog,
   Banner,
 } from '../../components';
@@ -19,13 +18,29 @@ export const UnlockView: React.FC = () => {
   const { unlock, wipe } = useVault();
 
   const [passphrase, setPassphrase] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isWipeModalOpen, setIsWipeModalOpen] = useState(false);
+  const [wipeConfirmText, setWipeConfirmText] = useState('');
   const [isWiping, setIsWiping] = useState(false);
+
+  // Progressive delay for failed unlock attempts
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [lockoutRemaining, setLockoutRemaining] = useState(0);
+
+  useEffect(() => {
+    if (lockoutRemaining <= 0) return;
+    const timer = setInterval(() => {
+      setLockoutRemaining((prev) => Math.max(0, prev - 1));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [lockoutRemaining]);
 
   const handleUnlock = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (lockoutRemaining > 0) return;
+
     setError(null);
     setIsSubmitting(true);
 
@@ -33,11 +48,28 @@ export const UnlockView: React.FC = () => {
     setIsSubmitting(false);
 
     if (!success) {
-      setError(t('vault.invalidPassphrase'));
+      const newAttempts = failedAttempts + 1;
+      setFailedAttempts(newAttempts);
+
+      if (newAttempts >= 5) {
+        // Progressive delay: 2s, 4s, 8s, up to 30s
+        const delay = Math.min(30, Math.pow(2, newAttempts - 4));
+        setLockoutRemaining(delay);
+        setError(
+          `${t('vault.invalidPassphrase')} Too many failed attempts. Temporary delay active (${delay}s).`,
+        );
+      } else {
+        setError(t('vault.invalidPassphrase'));
+      }
+    } else {
+      setFailedAttempts(0);
     }
   };
 
   const handleConfirmWipe = async () => {
+    if (wipeConfirmText.trim().toUpperCase() !== 'DELETE') {
+      return;
+    }
     setIsWiping(true);
     await wipe();
     setIsWiping(false);
@@ -66,15 +98,49 @@ export const UnlockView: React.FC = () => {
           </CardHeader>
 
           <CardContent className="space-y-4 pt-2">
-            <Field
-              label={t('vault.passphraseLabel')}
-              type="password"
-              required
-              value={passphrase}
-              onChange={(e) => setPassphrase(e.target.value)}
-              placeholder="••••••••"
-              error={error ?? undefined}
-            />
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <label
+                  htmlFor="unlock-passphrase-input"
+                  className="block text-xs font-semibold text-foreground/90 uppercase tracking-wider"
+                >
+                  {t('vault.passphraseLabel')}
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="text-xs text-primary hover:underline focus:outline-none"
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              </div>
+              <input
+                id="unlock-passphrase-input"
+                type={showPassword ? 'text' : 'password'}
+                required
+                disabled={lockoutRemaining > 0}
+                value={passphrase}
+                onChange={(e) => setPassphrase(e.target.value)}
+                placeholder="••••••••"
+                className={`w-full rounded-lg border bg-surface/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary ${
+                  error ? 'border-danger' : 'border-border'
+                }`}
+              />
+              {error && (
+                <p className="mt-1 text-xs text-danger" role="alert">
+                  {error}
+                </p>
+              )}
+            </div>
+
+            {failedAttempts >= 5 && (
+              <Banner variant="warning" title="Anti-Snooping Progressive Delay">
+                A client-side delay is active ({lockoutRemaining}s remaining) to deter casual local snooping.
+                <span className="block pt-1 text-[11px] opacity-80">
+                  Note: This cannot stop an attacker with device root access who extracts raw storage files.
+                </span>
+              </Banner>
+            )}
 
             <p className="text-xs text-muted-foreground text-center">
               {t('vault.autoLockNotice')}
@@ -82,8 +148,16 @@ export const UnlockView: React.FC = () => {
           </CardContent>
 
           <CardFooter className="flex flex-col gap-3">
-            <Button type="submit" fullWidth size="lg" isLoading={isSubmitting}>
-              {t('vault.unlockBtn')}
+            <Button
+              type="submit"
+              fullWidth
+              size="lg"
+              disabled={lockoutRemaining > 0}
+              isLoading={isSubmitting}
+            >
+              {lockoutRemaining > 0
+                ? `Wait ${lockoutRemaining}s to retry...`
+                : t('vault.unlockBtn')}
             </Button>
 
             <button
@@ -105,10 +179,21 @@ export const UnlockView: React.FC = () => {
         maxWidth="sm"
         footer={
           <div className="flex justify-end gap-2">
-            <Button variant="ghost" onClick={() => setIsWipeModalOpen(false)}>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setIsWipeModalOpen(false);
+                setWipeConfirmText('');
+              }}
+            >
               {t('vault.cancel')}
             </Button>
-            <Button variant="danger" isLoading={isWiping} onClick={handleConfirmWipe}>
+            <Button
+              variant="danger"
+              disabled={wipeConfirmText.trim().toUpperCase() !== 'DELETE'}
+              isLoading={isWiping}
+              onClick={handleConfirmWipe}
+            >
               {t('vault.wipeConfirmAction')}
             </Button>
           </div>
@@ -118,6 +203,23 @@ export const UnlockView: React.FC = () => {
           <Banner variant="danger" title="Irreversible Action">
             {t('vault.wipeConfirmBody')}
           </Banner>
+
+          <div className="space-y-2 pt-1">
+            <label
+              htmlFor="wipe-confirmation-word"
+              className="block text-xs font-semibold text-foreground/90 uppercase tracking-wider"
+            >
+              Type &quot;DELETE&quot; to confirm:
+            </label>
+            <input
+              id="wipe-confirmation-word"
+              type="text"
+              value={wipeConfirmText}
+              onChange={(e) => setWipeConfirmText(e.target.value)}
+              placeholder="DELETE"
+              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-danger"
+            />
+          </div>
         </div>
       </Dialog>
     </div>

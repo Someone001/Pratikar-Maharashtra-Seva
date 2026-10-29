@@ -124,3 +124,4 @@ describe('Tamper-Evident Hash Chain Engine', () => {
     expect(result.brokenSeq).toBe(2);
   });
 });
+

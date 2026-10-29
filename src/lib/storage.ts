@@ -103,6 +103,9 @@ export const DEFAULT_SETTINGS: PlaintextSettings = {
   highContrast: false,
   reducedMotion: false,
   camouflageMode: false,
+  autoLockMinutes: 5,
+  quickExitUrl: 'https://www.google.com',
+  devanagariNumerals: false,
 };
 
 export async function getSettings(): Promise<PlaintextSettings> {
@@ -281,6 +284,8 @@ export async function saveEvidenceEntry(entry: EvidenceEntry, key: CryptoKey): P
   await db.put('evidence', stored);
 }
 
+export const saveEvidence = saveEvidenceEntry;
+
 export async function getEvidenceByCase(caseId: string, key: CryptoKey): Promise<EvidenceEntry[]> {
   if (!key) throw new VaultLockedError();
   const db = await getDb();
@@ -297,6 +302,289 @@ export async function getEvidenceByCase(caseId: string, key: CryptoKey): Promise
   }
 
   return entries.sort((a, b) => a.seq - b.seq);
+}
+
+/* ---------------- Re-encrypt Vault (Passphrase Change) ---------------- */
+
+export async function changeVaultPassphrase(
+  oldKey: CryptoKey,
+  newPassphrase: string,
+): Promise<{ newKey: CryptoKey; newVault: Vault }> {
+  if (!oldKey) throw new VaultLockedError();
+  const db = await getDb();
+
+  // 1. Fetch all records using old key
+  const cases = await getCases(oldKey);
+  const allLinks: LinkRecord[] = [];
+  const allReports: ReportRecord[] = [];
+  const allEvidence: EvidenceEntry[] = [];
+
+  for (const c of cases) {
+    const l = await getLinksByCase(c.id, oldKey);
+    const r = await getReportsByCase(c.id, oldKey);
+    const e = await getEvidenceByCase(c.id, oldKey);
+    allLinks.push(...l);
+    allReports.push(...r);
+    allEvidence.push(...e);
+  }
+
+  // 2. Create new vault credentials with 600,000 iterations
+  const { createVault } = await import('./crypto');
+  const { vault: newVault, key: newKey } = await createVault(newPassphrase);
+
+  // 3. Re-encrypt all records with new key
+  for (const c of cases) {
+    const encrypted = await encryptData(JSON.stringify(c), newKey);
+    await db.put('cases', { id: c.id, encrypted });
+  }
+
+  for (const l of allLinks) {
+    const encrypted = await encryptData(JSON.stringify(l), newKey);
+    await db.put('links', { id: l.id, caseId: l.caseId, encrypted });
+  }
+
+  for (const r of allReports) {
+    const encrypted = await encryptData(JSON.stringify(r), newKey);
+    await db.put('reports', { id: r.id, caseId: r.caseId, encrypted });
+  }
+
+  for (const e of allEvidence) {
+    const encrypted = await encryptData(JSON.stringify(e), newKey);
+    await db.put('evidence', { id: e.id, caseId: e.caseId, seq: e.seq, encrypted });
+  }
+
+  // 4. Save new vault metadata
+  await saveVaultMetadata(newVault);
+  await logAuditEvent('unlock');
+
+  return { newKey, newVault };
+}
+
+/* ---------------- Backup Export & Import ---------------- */
+
+export interface BackupContainer {
+  format: 'pratikar_encrypted_backup';
+  schemaVersion: 1;
+  createdAt: string;
+  payload: EncryptedPayload;
+}
+
+export async function exportEncryptedBackup(key: CryptoKey): Promise<string> {
+  if (!key) throw new VaultLockedError();
+  const cases = await getCases(key);
+  const links: LinkRecord[] = [];
+  const reports: ReportRecord[] = [];
+  const evidence: EvidenceEntry[] = [];
+
+  for (const c of cases) {
+    const l = await getLinksByCase(c.id, key);
+    const r = await getReportsByCase(c.id, key);
+    const e = await getEvidenceByCase(c.id, key);
+    links.push(...l);
+    reports.push(...r);
+    evidence.push(...e);
+  }
+
+  const plainBackup = {
+    cases,
+    links,
+    reports,
+    evidence,
+  };
+
+  const encrypted = await encryptData(JSON.stringify(plainBackup), key);
+  const container: BackupContainer = {
+    format: 'pratikar_encrypted_backup',
+    schemaVersion: 1,
+    createdAt: new Date().toISOString(),
+    payload: encrypted,
+  };
+
+  await logAuditEvent('export');
+  return JSON.stringify(container, null, 2);
+}
+
+export async function importEncryptedBackup(
+  key: CryptoKey,
+  jsonString: string,
+): Promise<{ casesCount: number; evidenceCount: number }> {
+  if (!key) throw new VaultLockedError();
+
+  let container: unknown;
+  try {
+    container = JSON.parse(jsonString);
+  } catch {
+    throw new Error('Invalid JSON file format.');
+  }
+
+  if (
+    typeof container !== 'object' ||
+    container === null ||
+    (container as BackupContainer).format !== 'pratikar_encrypted_backup' ||
+    (container as BackupContainer).schemaVersion !== 1
+  ) {
+    throw new Error('Unsupported or invalid backup format. Schema version must be 1.');
+  }
+
+  const validContainer = container as BackupContainer;
+  let decrypted: string;
+  try {
+    decrypted = await decryptData(validContainer.payload, key);
+  } catch {
+    throw new Error('Failed to decrypt backup. The passphrase of this vault does not match the backup.');
+  }
+
+  const parsed = JSON.parse(decrypted) as {
+    cases: CaseRecord[];
+    links: LinkRecord[];
+    reports: ReportRecord[];
+    evidence: EvidenceEntry[];
+  };
+
+  if (!Array.isArray(parsed.cases) || !Array.isArray(parsed.evidence)) {
+    throw new Error('Corrupted backup content structure.');
+  }
+
+  const db = await getDb();
+
+  for (const c of parsed.cases) {
+    await saveCase(c, key);
+  }
+  for (const l of parsed.links || []) {
+    await saveLink(l, key);
+  }
+  for (const r of parsed.reports || []) {
+    await saveReport(r, key);
+  }
+  for (const e of parsed.evidence || []) {
+    const encrypted = await encryptData(JSON.stringify(e), key);
+    await db.put('evidence', { id: e.id, caseId: e.caseId, seq: e.seq, encrypted });
+  }
+
+  await logAuditEvent('import');
+  return {
+    casesCount: parsed.cases.length,
+    evidenceCount: parsed.evidence.length,
+  };
+}
+
+/* ---------------- Demo Case (Section 20) ---------------- */
+
+export const DEMO_CASE_ID = 'demo-case-pratikar-fictional-001';
+
+export async function loadDemoCase(key: CryptoKey): Promise<CaseRecord> {
+  if (!key) throw new VaultLockedError();
+  const now = new Date();
+  const submitted20hAgo = new Date(now.getTime() - 20 * 60 * 60 * 1000);
+  const submitted30hAgo = new Date(now.getTime() - 30 * 60 * 60 * 1000);
+
+  const demoCase: CaseRecord = {
+    id: DEMO_CASE_ID,
+    nickname: 'DEMO CASE - NOT REAL',
+    createdAt: submitted30hAgo.toISOString(),
+    updatedAt: now.toISOString(),
+    mode: 'self',
+    situation: ['threatened', 'morphed'],
+    platforms: ['instagram', 'x'],
+    demandsMade: {
+      money: true,
+      moreImages: true,
+      other: false,
+      notes: 'Demo extortion threat via anonymous handle. Demanded funds within 24h.',
+    },
+    offenderKnown: 'unknown',
+    identifiers: ['@fictional_demo_handle', '+91 99999 00000'],
+    personalDetails: {
+      name: 'Sample Complainant (Demo)',
+      email: 'demo@example.org',
+    },
+    status: 'active',
+  };
+
+  const demoLink1: LinkRecord = {
+    id: 'demo-link-1',
+    caseId: DEMO_CASE_ID,
+    url: 'https://example.com/demo-post-1',
+    platform: 'Instagram',
+    firstSeenAt: submitted30hAgo.toISOString(),
+    notes: 'Fictional demo URL for testing',
+    status: 'visible',
+  };
+
+  const demoLink2: LinkRecord = {
+    id: 'demo-link-2',
+    caseId: DEMO_CASE_ID,
+    url: 'https://example.org/demo-post-2',
+    platform: 'X',
+    firstSeenAt: submitted30hAgo.toISOString(),
+    notes: 'Fictional demo URL for testing',
+    status: 'visible',
+  };
+
+  // Pending report (4h remaining of 24h window)
+  const demoReportPending: ReportRecord = {
+    id: 'demo-report-pending',
+    caseId: DEMO_CASE_ID,
+    platform: 'Instagram',
+    channel: 'platform',
+    submittedAt: submitted20hAgo.toISOString(),
+    dueAt: new Date(submitted20hAgo.getTime() + 24 * 60 * 60 * 1000).toISOString(),
+    referenceNumber: 'IG-DEMO-REF-9876',
+    linkIds: [demoLink1.id],
+    outcome: 'pending',
+    notes: 'Submitted via in-app reporting tool',
+  };
+
+  // Overdue report (submitted 30h ago, due 6h ago -> triggers escalation ladder!)
+  const demoReportOverdue: ReportRecord = {
+    id: 'demo-report-overdue',
+    caseId: DEMO_CASE_ID,
+    platform: 'X',
+    channel: 'followup',
+    submittedAt: submitted30hAgo.toISOString(),
+    dueAt: new Date(submitted30hAgo.getTime() + 24 * 60 * 60 * 1000).toISOString(),
+    referenceNumber: 'X-DEMO-TICKET-5432',
+    linkIds: [demoLink2.id],
+    outcome: 'noResponse',
+    notes: 'Platform missed 24h deadline; requires Grievance Officer and GAC escalation.',
+  };
+
+  await saveCase(demoCase, key);
+  await saveLink(demoLink1, key);
+  await saveLink(demoLink2, key);
+  await saveReport(demoReportPending, key);
+  await saveReport(demoReportOverdue, key);
+
+  // Add initial hash-chained evidence
+  const { appendEvidenceEntry } = await import('./hashchain');
+  await appendEvidenceEntry(
+    DEMO_CASE_ID,
+    'threat_received',
+    {
+      sender: '@fictional_demo_handle',
+      messageText: 'Send payment or morphed image will be posted on social media (DEMO DATA)',
+      receivedAt: submitted30hAgo.toISOString(),
+    },
+    key,
+  );
+
+  return demoCase;
+}
+
+export async function removeDemoCase(key: CryptoKey): Promise<void> {
+  if (!key) throw new VaultLockedError();
+  const db = await getDb();
+  await db.delete('cases', DEMO_CASE_ID);
+
+  // Clean associated links, reports, and evidence
+  const links = (await db.getAllFromIndex('links', 'by_case', DEMO_CASE_ID)) as StoredEncryptedRecord[];
+  for (const l of links) await db.delete('links', l.id);
+
+  const reports = (await db.getAllFromIndex('reports', 'by_case', DEMO_CASE_ID)) as StoredEncryptedRecord[];
+  for (const r of reports) await db.delete('reports', r.id);
+
+  const evidence = (await db.getAllFromIndex('evidence', 'by_case', DEMO_CASE_ID)) as StoredEncryptedRecord[];
+  for (const e of evidence) await db.delete('evidence', e.id);
 }
 
 /* ---------------- Audit Events (Unencrypted Timestamps Only) ---------------- */
@@ -345,3 +633,4 @@ export async function wipeAllData(): Promise<void> {
   localStorage.clear();
   sessionStorage.clear();
 }
+

@@ -34,3 +34,4 @@ module.exports = {
   },
   ignorePatterns: ['dist', 'node_modules', '*.config.js', '*.config.ts', 'dist-ssr'],
 };
+
