@@ -24,7 +24,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, isCamouflage }) => {
             {t('app.name')} • {t('app.nativeName')}
           </p>
           <p className="max-w-xl mx-auto">{t('app.disclaimerNotice')}</p>
-          <p className="text-[11px] pt-1 opacity-70">{t('app.tamperNotice')}</p>
+          <p className="text-xs pt-1 text-muted-foreground">{t('app.tamperNotice')}</p>
         </div>
       </footer>
     </div>

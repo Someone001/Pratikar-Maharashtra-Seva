@@ -56,11 +56,26 @@ export const ActionWizard: React.FC<ActionWizardProps> = ({
 
   if (!activeCase) {
     return (
-      <Card variant="muted" className="p-8 text-center">
-        <p className="text-sm text-muted-foreground">
-          Please select or create an incident case first to view customized redress guidance.
-        </p>
-      </Card>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            {t('wizard.title')}
+          </h1>
+          <p className="text-sm text-muted-foreground pt-1">
+            {t('wizard.subtitle')}
+          </p>
+        </div>
+        <Card variant="muted" className="p-8 text-center space-y-4 border-border">
+          <p className="text-sm text-muted-foreground">
+            Please select or create an incident case first to view customized redress guidance.
+          </p>
+          <div>
+            <Button onClick={() => { window.location.hash = '#/cases'; }}>
+              Create or Select an Incident Case →
+            </Button>
+          </div>
+        </Card>
+      </div>
     );
   }
 

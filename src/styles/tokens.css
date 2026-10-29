@@ -9,32 +9,32 @@
   --color-muted: #1e293b;
   --color-muted-fg: #94a3b8;
 
-  /* Primary brand: Calming, steady teal */
-  --color-primary: #0d9488;
-  --color-primary-hover: #14b8a6;
-  --color-primary-fg: #ffffff;
+  /* Primary brand: Calming, steady teal (WCAG AA compliant contrast) */
+  --color-primary: #2dd4bf;
+  --color-primary-hover: #5eead4;
+  --color-primary-fg: #0f172a;
 
   /* Secondary: Soft slate */
   --color-secondary: #334155;
   --color-secondary-fg: #f8fafc;
 
   /* Accent: Sky blue */
-  --color-accent: #0284c7;
-  --color-accent-fg: #ffffff;
+  --color-accent: #38bdf8;
+  --color-accent-fg: #0f172a;
 
   /* Warning: Warm amber (no aggressive red walls) */
-  --color-warning: #d97706;
-  --color-warning-fg: #ffffff;
+  --color-warning: #fbbf24;
+  --color-warning-fg: #0f172a;
   --color-warning-surface: #451a03;
 
   /* Danger: Muted rose (used sparingly for critical destructive actions) */
-  --color-danger: #e11d48;
-  --color-danger-fg: #ffffff;
+  --color-danger: #fb7185;
+  --color-danger-fg: #0f172a;
   --color-danger-surface: #4c0519;
 
   /* Success: Forest emerald */
-  --color-success: #059669;
-  --color-success-fg: #ffffff;
+  --color-success: #34d399;
+  --color-success-fg: #0f172a;
   --color-success-surface: #064e3b;
 
   --radius: 0.5rem;
