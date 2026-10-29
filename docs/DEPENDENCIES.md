@@ -30,6 +30,7 @@ Every dependency used in Pratikar is pinned to an exact version, audited for ope
 - **`@testing-library/jest-dom` (6.6.3)**: Custom Jest/Vitest matchers for asserting on the state of the DOM.
 - **`@testing-library/user-event` (14.6.1)**: Simulation of native browser user interactions for tests.
 - **`jsdom` (26.0.0)**: Pure JavaScript implementation of WHATWG DOM and HTML standards for testing.
+- **`fake-indexeddb` (6.0.0)**: In-memory IndexedDB polyfill for Vitest unit test environment.
 - **`eslint` (8.57.1)**: JavaScript/TypeScript linter enforcing clean code standards.
 - **`@typescript-eslint/parser` (8.24.0)**: ESLint parser enabling linting of TypeScript source code.
 - **`@typescript-eslint/eslint-plugin` (8.24.0)**: ESLint rules for TypeScript codebases.
